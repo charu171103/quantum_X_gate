@@ -1,104 +1,108 @@
-# Quantum X Gate Demonstration
+# 🧠 Quantum X Gate Demonstration
 
-## Overview
-
-The **Quantum X Gate** (also called the NOT gate or bit-flip gate) is one of the fundamental single-qubit gates in quantum computing. It flips the computational basis states:
-
-- \( X|0\rangle = |1\rangle \)
-- \( X|1\rangle = |0\rangle \)
-
-Its matrix representation is:
-
-\[
-X = \begin{bmatrix}
-0 & 1 \\
-1 & 0
-\end{bmatrix}
-\]
-
-This gate corresponds to a rotation by \(\pi\) radians (180°) about the X-axis on the Bloch sphere.
+This notebook demonstrates how the **Quantum X Gate** (also called the **quantum NOT gate**) acts on different quantum states.
 
 ---
 
-## Input States Considered
+## 🧮 What is the X Gate?
 
-We demonstrate the effect of the X gate on four important quantum states:
+The **X gate** is a single-qubit quantum gate that flips the qubit state from `|0>` to `|1>` and vice versa. It's the quantum equivalent of the classical NOT gate.
 
-1. \(|0\rangle = \begin{bmatrix}1 \\ 0\end{bmatrix}\)
+### Matrix Representation:
 
-2. \(|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}} = \frac{1}{\sqrt{2}} \begin{bmatrix}1 \\ -1\end{bmatrix}\)
+```
+X = [ 0  1 ]
+    [ 1  0 ]
+```
 
-3. \(|i\rangle = \frac{|0\rangle + i|1\rangle}{\sqrt{2}} = \frac{1}{\sqrt{2}} \begin{bmatrix}1 \\ i\end{bmatrix}\)
+It swaps amplitudes of `|0>` and `|1>`:
 
-4. \(|-i\rangle = \frac{|0\rangle - i|1\rangle}{\sqrt{2}} = \frac{1}{\sqrt{2}} \begin{bmatrix}1 \\ -i\end{bmatrix}\)
-
----
-
-## Action of the X Gate on These States
-
-### 1. On \(|0\rangle\):
-
-\[
-X|0\rangle = |1\rangle
-\]
-
-The X gate flips \(|0\rangle\) to \(|1\rangle\).
+```
+X|0> = |1>
+X|1> = |0>
+```
 
 ---
 
-### 2. On \(|-\rangle\):
+## 🧬 Input States Tested
 
-\[
-X|-\rangle = -|-\rangle
-\]
+This notebook applies the X gate to the following states:
 
-The X gate applies a **phase flip** (multiplies by \(-1\)) on the \(|-\rangle\) state.
+### 1. `|0>`
 
----
-
-### 3. On \(|i\rangle\):
-
-\[
-X|i\rangle = i |-i\rangle
-\]
-
-The X gate rotates \(|i\rangle\) into \(|-i\rangle\), introducing a phase factor of \(i\).
+```
+|0> = [1, 0]
+X|0> = |1> = [0, 1]
+```
 
 ---
 
-### 4. On \(|-i\rangle\):
+### 2. `|-> = (|0> - |1>) / √2`
 
-\[
-X|-i\rangle = -i |i\rangle
-\]
+```
+|-> = [1/√2, -1/√2]
+X|-> = (|1> - |0>) / √2 = -|-> = [-1/√2, 1/√2]
+```
 
-Similarly, the X gate rotates \(|-i\rangle\) into \(|i\rangle\), with a phase factor of \(-i\).
-
----
-
-## Summary Table
-
-| Input State | Output State | Interpretation                  |
-|-------------|--------------|--------------------------------|
-| \(|0\rangle\) | \(|1\rangle\) | Bit flip                      |
-| \(|-\rangle\) | \(-|-\rangle\) | Phase flip                    |
-| \(|i\rangle\) | \(i|-i\rangle\) | Rotates to \(|-i\rangle\) with phase \(i\) |
-| \(|-i\rangle\) | \(-i|i\rangle\) | Rotates to \(|i\rangle\) with phase \(-i\) |
+🟢 **Note:** The global phase (like `-1`) has no physical meaning in quantum mechanics, so `- |->` is equivalent to `|->`.
 
 ---
 
-## Intuition
+### 3. `|i> = (|0> + i|1>) / √2`
 
-- The X gate swaps the computational basis states \(|0\rangle\) and \(|1\rangle\).
-- For superposition states \(|-\rangle\), \(|i\rangle\), and \(|-i\rangle\), it not only flips the basis components but can also introduce phase changes.
-- This corresponds to a 180° rotation around the X-axis of the Bloch sphere, affecting both amplitude and phase of the qubit's state.
-
----
-
-## Usage in the Notebook
-
-This notebook demonstrates the matrix multiplication for each input state and visualizes the transformations on the Bloch sphere, helping you understand the geometric action of the X gate on various quantum states.
+```
+|i> = [1/√2, i/√2]
+X|i> = (|1> + i|0>) / √2 = [i/√2, 1/√2]
+```
 
 ---
 
-Feel free to explore and extend the notebook by adding simulations or other quantum gates!
+### 4. `|-i> = (|0> - i|1>) / √2`
+
+```
+|-i> = [1/√2, -i/√2]
+X|-i> = (|1> - i|0>) / √2 = [-i/√2, 1/√2]
+```
+
+---
+
+## 📊 Output and Observation
+
+Each application of the X gate is shown with:
+
+* The original state vector
+* The matrix multiplication with the X gate
+* The resulting state vector after transformation
+
+These examples help in understanding how the X gate behaves not only on basis states but also on **superposition** and **complex phase** states.
+
+---
+
+## 📁 Contents of the Notebook
+
+* `x_gate_matrix` – Numpy definition of the X gate
+* State definitions for `|0>`, `|->`, `|i>`, and `|-i>`
+* Application of the X gate using `numpy.dot()`
+* Printed output for each case
+* Optional visualization or explanation block (if added)
+
+---
+
+## 🧠 Why It Matters
+
+Understanding how basic gates like **X** act on different quantum states builds your foundation for more complex operations in quantum circuits — like **quantum algorithms**, **error correction**, and **entanglement**.
+
+---
+
+## 🚀 Requirements
+
+* Python 3.x
+* Numpy
+* Jupyter Notebook (optional, for interactive use)
+
+Install with:
+
+```bash
+pip install numpy
+```
+
